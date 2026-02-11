@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mi San Valentín ❤️</title>
+
+<style>
+body{
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Segoe UI';
+  margin:0;
+}
+
+/* CONTENEDOR GENERAL */
+#inicio, #sorpresa{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+/* CORAZÓN */
+.heart{
+  width:220px;
+  height:200px;
+  background:#ff2e63;
+  position:relative;
+  transform: rotate(-45deg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.heart:before,.heart:after{
+  content:"";
+  width:220px;height:200px;
+  background:#ff2e63;
+  border-radius:50%;
+  position:absolute;
+}
+.heart:before{ top:-110px; left:0; }
+.heart:after{ left:110px; top:0; }
+
+/* TEXTO DENTRO DEL CORAZÓN */
+.texto-corazon{
+  transform: rotate(45deg);
+  color:white;
+  font-size:20px;
+  width:180px;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* BOTONES */
+.botones{ margin-top:30px; }
+
+button{
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:12px;
+  background:white;
+  color:#ff2e63;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:18px;
+}
+
+/* FOTO */
+#sorpresa{ display:none; }
+
+img{
+  width:280px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(0,0,0,0.4);
+  margin-bottom:20px;
+}
+
+h2{ color:white; text-align:center; }
+</style>
+</head>
+
+<body>
+
+<audio id="musica" autoplay loop>
+  <source src="Magia.mp3" type="audio/mpeg">
+</audio>
+
+<div id="inicio">
+
+  <div class="heart">
+      <div class="texto-corazon">
+        ¿Quieres ser mi San Valentín? 💖
+      </div>
+  </div>
+
+  <div class="botones">
+    <button onclick="abrir()">Sí 💖</button>
+    <button onclick="abrir()">Obvio que sí 😍</button>
+  </div>
+
+</div>
+
+<div id="sorpresa">
+  <img src="foto.jpg">
+  <h2>
+    Gracias por estar conmigo,<br>
+    soy la persona más afortunada por tenerte a mi lado.<br>
+    Te amo ♥️
+  </h2>
+</div>
+
+<script>
+function abrir(){
+  document.getElementById("inicio").style.display="none";
+  document.getElementById("sorpresa").style.display="flex";
+  document.getElementById("musica").play();
+}
+</script>
+
+</body>
+</html>
