@@ -2,123 +2,174 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Mi San Valentín ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi San Valentín 💖</title>
 
 <style>
 body{
-  background: linear-gradient(135deg,#ff758c,#ff7eb3);
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:'Segoe UI';
-  margin:0;
+    margin:0;
+    height:100vh;
+    background:#f06282;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
 }
 
-/* CONTENEDOR GENERAL */
-#inicio, #sorpresa{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+/* CONTENEDOR PRINCIPAL */
+.contenedor{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 
 /* CORAZÓN */
 .heart{
-  width:220px;
-  height:200px;
-  background:#ff2e63;
-  position:relative;
-  transform: rotate(-45deg);
-  display:flex;
-  justify-content:center;
-  align-items:center;
+    width:220px;
+    height:200px;
+    background:#ff1f55;
+    position:relative;
+    transform:rotate(-45deg);
+    cursor:pointer;
+    animation: latido 1.5s infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.heart:before,.heart:after{
-  content:"";
-  width:220px;height:200px;
-  background:#ff2e63;
-  border-radius:50%;
-  position:absolute;
+.heart::before,
+.heart::after{
+    content:"";
+    width:220px;
+    height:200px;
+    background:#ff1f55;
+    border-radius:50%;
+    position:absolute;
 }
-.heart:before{ top:-110px; left:0; }
-.heart:after{ left:110px; top:0; }
+
+.heart::before{ top:-110px; left:0; }
+.heart::after{ left:110px; top:0; }
+
+@keyframes latido{
+    0%{ transform: rotate(-45deg) scale(1); }
+    50%{ transform: rotate(-45deg) scale(1.08); }
+    100%{ transform: rotate(-45deg) scale(1); }
+}
 
 /* TEXTO DENTRO DEL CORAZÓN */
-.texto-corazon{
-  transform: rotate(45deg);
-  color:white;
-  font-size:20px;
-  width:180px;
-  text-align:center;
-  font-weight:bold;
+.texto{
+    position:absolute;
+    transform: rotate(45deg);
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    text-align:center;
+    width:200px;
+    z-index:2;
 }
 
 /* BOTONES */
-.botones{ margin-top:30px; }
+.botones{
+    margin-top:40px;
+}
 
 button{
-  padding:12px 25px;
-  margin:10px;
-  border:none;
-  border-radius:12px;
-  background:white;
-  color:#ff2e63;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:18px;
+    padding:12px 25px;
+    border:none;
+    border-radius:12px;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
+    background:white;
+    color:#ff1f55;
+    font-weight:bold;
+    transition:0.3s;
 }
 
-/* FOTO */
-#sorpresa{ display:none; }
-
-img{
-  width:280px;
-  border-radius:20px;
-  box-shadow:0 0 25px rgba(0,0,0,0.4);
-  margin-bottom:20px;
+button:hover{
+    transform:scale(1.1);
 }
 
-h2{ color:white; text-align:center; }
+/* ANIMACIÓN ABRIR CORAZÓN */
+.abrir{
+    animation: abrir 1.5s forwards !important;
+}
+
+@keyframes abrir{
+    0%{ transform: rotate(-45deg) scale(1); opacity:1;}
+    100%{ transform: rotate(-45deg) scale(6); opacity:0;}
+}
+
+/* SORPRESA */
+.sorpresa{
+    position:absolute;
+    text-align:center;
+    opacity:0;
+    transition:1s;
+}
+
+.mostrar{
+    opacity:1;
+}
+
+.sorpresa img{
+    width:260px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.mensaje{
+    font-size:26px;
+    color:white;
+    margin-top:20px;
+    font-weight:bold;
+}
 </style>
 </head>
 
 <body>
 
-<audio id="musica" autoplay loop>
-  <source src="Magia.mp3" type="audio/mpeg">
-</audio>
+<audio id="musica" src="musica.mp3" loop></audio>
 
-<div id="inicio">
+<div class="contenedor">
 
-  <div class="heart">
-      <div class="texto-corazon">
-        ¿Quieres ser mi San Valentín? 💖
-      </div>
-  </div>
+    <!-- CORAZÓN -->
+    <div class="heart" id="heart" onclick="abrirCorazon()">
+        <div class="texto">¿Quieres ser mi San Valentín? 💘</div>
+    </div>
 
-  <div class="botones">
-    <button onclick="abrir()">Sí 💖</button>
-    <button onclick="abrir()">Obvio que sí 😍</button>
-  </div>
+    <!-- BOTONES -->
+    <div class="botones">
+        <button onclick="abrirCorazon()">Sí 💖</button>
+        <button onclick="abrirCorazon()">Obvio que sí 😍</button>
+    </div>
 
 </div>
 
-<div id="sorpresa">
-  <img src="foto.jpg">
-  <h2>
-    Gracias por estar conmigo,<br>
-    soy la persona más afortunada por tenerte a mi lado.<br>
-    Te amo ♥️
-  </h2>
+<!-- SORPRESA -->
+<div class="sorpresa" id="sorpresa">
+    <img src="foto.jpg">
+    <div class="mensaje">Te amo muchísimo ❤️</div>
 </div>
 
 <script>
-function abrir(){
-  document.getElementById("inicio").style.display="none";
-  document.getElementById("sorpresa").style.display="flex";
-  document.getElementById("musica").play();
+const musica = document.getElementById("musica");
+
+/* Truco autoplay compatible con navegadores */
+function iniciarMusica(){
+    musica.play().catch(()=>{});
+    document.removeEventListener("click", iniciarMusica);
+    document.removeEventListener("touchstart", iniciarMusica);
+}
+document.addEventListener("click", iniciarMusica);
+document.addEventListener("touchstart", iniciarMusica);
+
+/* Animación corazón */
+function abrirCorazon() {
+    document.getElementById("heart").classList.add("abrir");
+    document.getElementById("sorpresa").classList.add("mostrar");
 }
 </script>
 
